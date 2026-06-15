@@ -79,7 +79,7 @@
                 <div class="relative group">
                     <!-- Slide Image Container -->
                     <div class="aspect-w-16 aspect-h-9 relative overflow-hidden bg-stone-100" style="padding-bottom: 56.25%;">
-                        <img id="slideImage" src="https://placehold.co/800x450/7b5e43/ffffff?text=Slide+1\n(이미지를+여기에+연결하세요)" alt="설교 슬라이드" class="absolute top-0 left-0 w-full h-full object-contain transition-opacity duration-300">
+                        <img id="slideImage" src="images/slide1.jpg" alt="설교 슬라이드" class="absolute top-0 left-0 w-full h-full object-contain transition-opacity duration-300">
                     </div>
 
                     <!-- Navigation Buttons -->
@@ -226,20 +226,20 @@
         // 💡 깃허브에 이미지 파일들을 올리고, 아래 배열에 파일 이름(경로)을 적어주세요.
         // 예시: ['images/slide1.jpg', 'images/slide2.jpg', ...]
         const slideUrls = [
-            'images/slide2.png',
-            'images/slide3.png',
-            'images/slide4.png',
-            'images/slide5.png',
-            'images/slide6.png',
-            'images/slide7.png',
-            'images/slide8.png',
-            'images/slide9.png',
-            'images/slide10.png',
-            'images/slide11.png',
-            'images/slide12.png',
-            'images/slide13.png',
-            'images/slide14.png',
-            'images/slide15.png'
+            'images/slide2.jpg',
+            'images/slide3.jpg',
+            'images/slide4.jpg',
+            'images/slide5.jpg',
+            'images/slide6.jpg',
+            'images/slide7.jpg',
+            'images/slide8.jpg',
+            'images/slide9.jpg',
+            'images/slide10.jpg',
+            'images/slide11.jpg',
+            'images/slide12.jpg',
+            'images/slide13.jpg',
+            'images/slide14.jpg',
+            'images/slide15.jpg'
         ];
         
         let currentSlideIndex = 0;
@@ -334,7 +334,15 @@
         }
 
         // Initialize on load
-        document.addEventListener('DOMContentLoaded', updateUI);
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUI(); // 체크리스트 불러오기
+            
+            // 페이지 로딩 시 첫 번째 슬라이드 이미지와 카운터를 바로 세팅합니다.
+            if(slideUrls && slideUrls.length > 0) {
+                slideImageElement.src = slideUrls[0];
+                slideCounterElement.innerText = `1 / ${slideUrls.length}`;
+            }
+        });
     </script>
 </body>
 </html>
