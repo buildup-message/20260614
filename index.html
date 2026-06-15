@@ -69,6 +69,29 @@
                 </div>
             </section>
 
+            <!-- Sermon Slides Gallery -->
+            <section class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                <div class="p-4 border-b border-stone-100 flex justify-between items-center bg-[#fbf9f6]">
+                    <h2 class="text-lg font-bold text-stone-800"><i class="fas fa-images text-amber-600 mr-2"></i>설교 슬라이드</h2>
+                    <span id="slideCounter" class="text-sm font-medium text-stone-500 bg-stone-200 px-3 py-1 rounded-full">1 / 5</span>
+                </div>
+                
+                <div class="relative group">
+                    <!-- Slide Image Container -->
+                    <div class="aspect-w-16 aspect-h-9 relative overflow-hidden bg-stone-100" style="padding-bottom: 56.25%;">
+                        <img id="slideImage" src="https://placehold.co/800x450/7b5e43/ffffff?text=Slide+1\n(이미지를+여기에+연결하세요)" alt="설교 슬라이드" class="absolute top-0 left-0 w-full h-full object-contain transition-opacity duration-300">
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <button onclick="prevSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 text-stone-800 shadow hover:bg-white flex items-center justify-center transition-all opacity-70 hover:opacity-100 focus:outline-none">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button onclick="nextSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 text-stone-800 shadow hover:bg-white flex items-center justify-center transition-all opacity-70 hover:opacity-100 focus:outline-none">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+
             <!-- Sermon Summary Infographic -->
             <section>
                 <div class="flex items-center gap-3 mb-6">
@@ -173,7 +196,7 @@
         
         <footer class="bg-[#fbf9f6] border-t border-stone-200 p-6 text-center">
             <p class="text-stone-500 text-sm break-keep">
-                "혼돈에서 질서로, 공허에서 충만으로 나아가는 이 위대한 재창조의 축복이<br>여러분의 침상 위에서부터 시작되기를 축원합니다."
+                "혼돈에서 질서로, 공허에서 충만으로 나아가는 이 위대한 재창조의 축복이 여러분의 침상 위에서부터 시작되기를 축원합니다."
             </p>
             <p class="text-stone-400 text-xs mt-4">빌드업교회 주일설교 묵상자료</p>
         </footer>
@@ -198,6 +221,50 @@
                 desc: '기도로 내 삶의 통제권 내어드리기'
             }
         ];
+
+        // Sermon Slides Logic
+        // 💡 깃허브에 이미지 파일들을 올리고, 아래 배열에 파일 이름(경로)을 적어주세요.
+        // 예시: ['images/slide1.jpg', 'images/slide2.jpg', ...]
+        const slideUrls = [
+            'images/slide1.jpg',
+            'images/slide2.jpg',
+            'images/slide3.jpg',
+            'images/slide4.jpg',
+            'images/slide5.jpg',
+            'images/slide6.jpg',
+            'images/slide7.jpg',
+            'images/slide8.jpg',
+            'images/slide9.jpg',
+            'images/slide10.jpg',
+            'images/slide11.jpg',
+            'images/slide12.jpg',
+            'images/slide13.jpg',
+            'images/slide14.jpg',
+            'images/slide15.jpg'
+        ];
+        
+        let currentSlideIndex = 0;
+        const slideImageElement = document.getElementById('slideImage');
+        const slideCounterElement = document.getElementById('slideCounter');
+
+        function updateSlide() {
+            slideImageElement.style.opacity = 0; // 페이드 아웃 효과
+            setTimeout(() => {
+                slideImageElement.src = slideUrls[currentSlideIndex];
+                slideCounterElement.innerText = `${currentSlideIndex + 1} / ${slideUrls.length}`;
+                slideImageElement.style.opacity = 1; // 페이드 인 효과
+            }, 150); // 0.15초 후 이미지 변경 (자연스러운 전환)
+        }
+
+        function nextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % slideUrls.length;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentSlideIndex = (currentSlideIndex - 1 + slideUrls.length) % slideUrls.length;
+            updateSlide();
+        }
 
         // Load data from localStorage
         function loadData() {
